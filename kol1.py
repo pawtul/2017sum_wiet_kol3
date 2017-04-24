@@ -15,12 +15,16 @@ Additional:
 -no semicolons
 '''
 
+import numbers
 import random
 
 
 class Plane(object):
-    def __init__(self, angle):
-        self.angle = angle
+    def __init__(self, angle=0):
+        if isinstance(angle, numbers.Real):
+            self.angle = angle
+        else:
+            self.angle = 0
 
     def adjust_tilt(self):
         self.angle -= self.angle
@@ -30,7 +34,7 @@ class Plane(object):
 
 
 class Simulation(object):
-    def __init__(self, plane):
+    def __init__(self, plane=None):
         self.plane = plane
 
     def simulate(self):

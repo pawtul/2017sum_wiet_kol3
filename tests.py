@@ -32,10 +32,38 @@ class PlaneTestCase(unittest.TestCase):
         plane = Plane(16)
         self.assertEqual(plane.angle, 16)
 
+    def test_default_angle(self):
+        plane = Plane()
+        self.assertEqual(plane.angle, 0)
+
+    def test_non_numeric_angle(self):
+        plane = Plane('asd')
+        self.assertEqual(plane.angle, 0)
+
+    def test_complex_angle(self):
+        plane = Plane(23j)
+        self.assertEqual(plane.angle, 0)
+
+
     def test_adjusting_tilt(self):
         plane = Plane(33)
         plane.adjust_tilt()
         self.assertEqual(plane.angle, 0)
+
+    def test_adjusting_to_negative_angle(self):
+        plane = Plane(-20)
+        plane.adjust_tilt()
+        self.assertEqual(plane.angle, 0)
+
+    def test_adjusting_to_float_angle(self):
+        plane = Plane(20.4)
+        plane.adjust_tilt()
+        self.assertEqual(plane.angle, 0.0)
+
+    def test_adjusting_negative_float_angles(self):
+        plane = Plane(-20.4)
+        plane.adjust_tilt()
+        self.assertEqual(plane.angle, 0.0)
 
 
 class SimulationTestCase(unittest.TestCase):
@@ -65,3 +93,6 @@ class SimulationTestCase(unittest.TestCase):
         self.assertEqual(sys.stdout.history[0], "Simulation is ended!")
         sys.stdout = old_stdout
 
+
+if __name__ == '__main__':
+    unittest.main()
