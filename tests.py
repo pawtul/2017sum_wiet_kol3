@@ -44,7 +44,6 @@ class PlaneTestCase(unittest.TestCase):
         plane = Plane(23j)
         self.assertEqual(plane.angle, 0)
 
-
     def test_adjusting_tilt(self):
         plane = Plane(33)
         plane.adjust_tilt()
@@ -92,6 +91,10 @@ class SimulationTestCase(unittest.TestCase):
 
         self.assertEqual(sys.stdout.history[0], "Simulation is ended!")
         sys.stdout = old_stdout
+
+    def test_creating_plane(self):
+        simulation = Simulation()
+        self.assertTrue(isinstance(simulation.plane, Plane))
 
 
 if __name__ == '__main__':

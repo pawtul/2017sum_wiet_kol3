@@ -35,7 +35,10 @@ class Plane(object):
 
 class Simulation(object):
     def __init__(self, plane=None):
-        self.plane = plane
+        if plane is not None:
+            self.plane = plane
+        else:
+            self.plane = Plane()
 
     def simulate(self):
 		print "Current plane angle is: {} degrees\nCorrection needed: {}\n".format(self.plane.angle, -self.plane.angle)
